@@ -1,0 +1,85 @@
+<h1>Food-edit</h1>
+
+<div *ngIf="isLoading" class="row spinner">
+    <img src="./assets/images/spinner.svg" alt="Loading...">
+  </div>
+
+<div *ngIf="!isLoading">
+<form novalidate [formGroup]="foodForm">
+    <fieldset>
+      <div class="form-group">
+        <label class="form-control-label" for="name">Name<span class="text-danger">*</span></label>
+        <input id="name" type="text" name="name" class="form-control" formControlName="name"
+          [ngClass]="{
+              'is-invalid':name.errors && (name.dirty || name.touched),
+              'is-valid':!name.errors && (name.dirty || name.touched) }" >
+        <div class="invalid-feedback">
+          <p *ngIf="name.errors?.required">Name field is required.</p>
+          <p *ngIf="name.errors?.minlength">name must be 3 characters long, we need another {{name.errors.minlength.requiredLength - name.errors.minlength.actualLength}} characters </p>        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" for="legend">Legend</label>
+        <input id="legend" type="text" class="form-control" formControlName="legend" 
+            [ngClass]="{
+              'is-invalid':legend.errors && (legend.dirty || legend.touched),
+              'is-valid':!legend.errors && (legend.dirty || legend.touched) }">
+        <div class="invalid-feedback">
+          <p *ngIf="legend.errors?.required">Legend field is required.</p>
+          <p *ngIf="legend.errors?.minlength">legend must be 3 characters long, we need another {{legend.errors.minlength.requiredLength - legend.errors.minlength.actualLength}} characters </p>        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" for="selected_score">Selected score</label>
+        <select id="selected_score" class="custom-select" formControlName="selected_score" >
+          <option [ngValue]="s" *ngFor="let s of scores" >{{s}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" for="deselected_score">Deselected score</label>
+        <select id="deselected_score" class="custom-select" formControlName="deselected_score" >
+          <option [ngValue]="s" *ngFor="let s of scores">{{s}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" for="category_id">Categories<span class="text-danger">*</span></label>
+        <select id="category_id" class="custom-select" formControlName="category_id" >
+          <option [ngValue]="category.id" *ngFor="let category of selectCategories">{{category.name}}</option>
+        </select>
+      </div>
+
+      <img src="https://picsum.photos/100/100" alt="">
+      <!-- Image Preview -->
+      <!-- <div class="imagePreview" *ngIf="image_url">
+        <img [src]="(imgPath + image_url.value)" [alt]="foodForm.value.name" width="100px" height="100px">
+      </div> -->
+
+      <div class="form-group">
+        <label for="file">Image<span class="text-danger">*</span></label>
+        <input type="file" class="form-control-file" accept="image/*" id="file" aria-describedby="fileHelp"
+         (change)="onFileSelected($event)"
+          >
+        <small id="fileHelp" class="form-text text-muted">Accepted formats: JPEG/PNG </small>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleTextarea">Description<span class="text-danger">*</span></label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" spellcheck="false"
+          formControlName="description" 
+          [ngClass]="{
+            'is-invalid':description.errors && (description.dirty || description.touched),
+            'is-valid':!description.errors && (description.dirty || description.touched) }"></textarea>
+            <div class="invalid-feedback">
+              <p *ngIf="description.errors?.required">Description field is required.</p>
+              <p *ngIf="description.errors?.minlength">description must be 5 characters long, we need another {{description.errors.minlength.requiredLength - description.errors.minlength.actualLength}} characters </p>       
+            </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="foodForm.invalid" (click)="submit()">Submit</button>
+      <button type="button" class="btn  btn-outline-primary ml-md-3" (click)="foodForm.reset()">Rest</button>
+    </fieldset>
+  </form>
+</div>
+  

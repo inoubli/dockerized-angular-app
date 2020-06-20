@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+h1{
+    margin-bottom: 50px;
+}
+
+
+/* -------------------------  Customized BootsWatch .card-body  ------------ */
+.card-body-inline{
+    display: inline-block;
+}
+
+.card-body-right{
+    float: right;
+    margin-right: 250px;
+}
+/* -------------------------  Array Buttons -------------------------------- */
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin-left: 5px;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+
+/* -------------------------  SPINNER  ---------------------------------- */
+.spinner{
+    margin-top: 200px;
+}
+
+.spinner>img{
+    margin-left: auto; margin-right: auto;
+}

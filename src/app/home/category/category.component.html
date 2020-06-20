@@ -1,0 +1,48 @@
+<form novalidate [formGroup]="categoryForm">
+  <fieldset>
+    <div class="form-group">
+      <label class="form-control-label" for="name">Name<span class="text-danger">*</span></label>
+      <input id="name" type="text" name="name" class="form-control" formControlName="name"
+        [ngClass]="{
+            'is-invalid':name.errors && (name.dirty || name.touched),
+            'is-valid':!name.errors && (name.dirty || name.touched) }" >
+      <div class="invalid-feedback">
+        <p *ngIf="name.errors?.required">Name field is required.</p>
+        <p *ngIf="name.errors?.minlength">name must be 3 characters long, we need another {{name.errors.minlength.requiredLength - name.errors.minlength.actualLength}} characters </p>        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="legend">Legend</label>
+      <input id="legend" type="text" class="form-control" formControlName="legend" 
+          [ngClass]="{
+            'is-invalid':legend.errors && (legend.dirty || legend.touched),
+            'is-valid':!legend.errors && (legend.dirty || legend.touched) }">
+      <div class="invalid-feedback">
+        <p *ngIf="legend.errors?.required">Legend field is required.</p>
+        <p *ngIf="legend.errors?.minlength">legend must be 3 characters long, we need another {{legend.errors.minlength.requiredLength - legend.errors.minlength.actualLength}} characters </p>        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-control-label" for="meals">Meals<span class="text-danger">*</span></label>
+      <select id="meals" class="custom-select" formControlName="meals" multiple size="3">
+        <option [value]="meal.id" *ngFor="let meal of mockMeals">{{meal.name}}</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="exampleTextarea">Description<span class="text-danger">*</span></label>
+      <textarea class="form-control" id="exampleTextarea" rows="3" spellcheck="false"
+        formControlName="description" 
+        [ngClass]="{
+          'is-invalid':description.errors && (description.dirty || description.touched),
+          'is-valid':!description.errors && (description.dirty || description.touched) }"></textarea>
+          <div class="invalid-feedback">
+            <p *ngIf="description.errors?.required">Description field is required.</p>
+            <p *ngIf="description.errors?.minlength">description must be 5 characters long, we need another {{description.errors.minlength.requiredLength - description.errors.minlength.actualLength}} characters </p>       
+          </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid" (click)="submit()">Submit</button>
+    <button type="button" class="btn  btn-outline-primary ml-md-3" (click)="categoryForm.reset()">Rest</button>
+  </fieldset>
+</form>

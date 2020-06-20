@@ -1,0 +1,46 @@
+<h1>list of foods</h1>
+<div *ngIf="isLoading" class="row spinner">
+  <img src="./assets/images/spinner.svg" alt="Loading...">
+</div>
+
+<table *ngIf="!isLoading" class="table table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">S-Score</th>
+      <th scope="col">D-Score</th>
+      <th scope="col">Legend</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let food of foods | paginate : { id: 'foods_pagination',
+      itemsPerPage: itemsPerPage,
+      totalItems: totalItems,
+      currentPage: page }">
+      <th scope="row">{{food.id}}</th>
+      <td>{{food.name}}</td>
+      <td>{{food.selected_score}}</td>
+      <td>{{food.deselected_score}}</td>
+      <td><span class="badge badge-pill badge-info">{{food.legend}}</span></td>
+      <td>
+          <button type="button" class="btn btn-info btn-circle"  data-placement="top" title="View" [routerLink]="['/lists/food/view', food.id]">
+            <i class="fa fa-list"></i></button>
+          <button type="button" class="btn btn-warning btn-circle" data-placement="top" title="Edit" [routerLink]="['/lists/food/edit', food.id]">
+            <i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-danger btn-circle" data-placement="top" title="Delete" (click)="delete(food.id)">
+            <i class="fa fa-window-close"></i></button>
+        </td>     
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!isLoading">
+  <pagination-controls 
+    id="foods_pagination" 
+    directionLinks="true"  
+    (pageChange)="pageChanged($event)">
+
+  
+  </pagination-controls>
+</div>

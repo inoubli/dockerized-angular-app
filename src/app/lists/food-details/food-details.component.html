@@ -1,0 +1,63 @@
+<h1>Food-details</h1>
+<div *ngIf="isLoading" class="row spinner">
+    <img src="./assets/images/spinner.svg" alt="Loading...">
+</div>
+
+<!-- <div *ngIf="food$" class="card border-info mb-3" style="max-width: 80rem;"> -->
+<div *ngIf="!isLoading" class="card border-info mb-3" style="max-width: 80rem;">
+    <div class="card-header"><h3>{{food$.name}}</h3> </div>
+    
+    <div>
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Description</h4>
+            <p class="card-text">{{food$.description}}</p>
+          </div>
+        <div class="card-body card-body-inline" >
+                <img src="https://picsum.photos/200/100" alt="">    
+                <!-- Image Preview -->
+            <!-- <div class="imagePreview" *ngIf="food$.image_url">
+                <img [src]="(imgPath + food$.image_url)" [alt]="food$.name" width="100px" height="100px">
+            </div>             -->
+        </div>
+    </div>
+    
+
+    <div>
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Category</h4>
+                <span class="badge badge-pill badge-success" style="margin-right: 15px;">{{food$.category.name}}</span>                
+        </div>
+    </div>
+
+    <div>
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Selected Score</h4>
+            <p class="card-text">{{food$.selected_score}}</p>
+        </div>
+
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Deselected Score</h4>
+            <p class="card-text">{{food$.deselected_score}}</p>
+        </div>
+    </div>
+
+    <div>
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Legend</h4>
+            <p class="card-text">
+                <span class="badge badge-pill badge-info">{{food$.legend}}</span>
+            </p>
+        </div>
+
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Created at</h4>
+            <p class="card-text">{{food$.created_at | date}}</p>
+        </div>
+
+        <div class="card-body card-body-inline" >
+            <h4 class="card-title">Updated at</h4>
+            <p class="card-text">{{food$.updated_at | date}}</p>
+        </div>
+    </div>
+    
+</div>

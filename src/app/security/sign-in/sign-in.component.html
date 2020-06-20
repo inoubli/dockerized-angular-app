@@ -1,0 +1,71 @@
+
+
+<!-- Error message -->
+<div class="row">
+    <div class="alert alert-dismissible alert-danger" *ngIf="serverErrorMessages">
+        {{serverErrorMessages}}
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="row spinner">
+   <img src="./assets/images/spinner.svg" alt="Loading...">
+</div>
+
+<div *ngIf="!isLoading" class="card border-info mb-3" style="max-width: 80rem; margin-top: 100px;">
+    <div class="card-header"><h3>Sign-in</h3> </div>
+    <div class="card-body">
+     
+
+
+        <form novalidate [formGroup]="form">
+            <fieldset>
+                <div class="form-group">
+                    <label class="form-control-label" for="username">Email<span class="text-danger">*</span></label>
+                    <input id="username" type="text" name="username" class="form-control" formControlName="username" [ngClass]="{
+                      'is-invalid':f.username.errors && (f.username.dirty || f.username.touched),
+                      'is-valid':!f.username.errors && (f.username.dirty || f.username.touched) }">
+                    <div class="invalid-feedback">
+                        <p *ngIf="f.username.errors?.required">Username field is required.</p>
+                        <p *ngIf="f.username.errors?.minlength">username must be 3 characters long, we need another
+                            {{f.username.errors.minlength.requiredLength - f.username.errors.minlength.actualLength}} characters
+                        </p>
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label class="form-control-label" for="name">Password<span class="text-danger">*</span></label>
+                    <input id="password" type="password" name="password" class="form-control" formControlName="password"
+                        [ngClass]="{
+                      'is-invalid':f.password.errors && (f.password.dirty || f.password.touched),
+                      'is-valid':!f.password.errors && (f.password.dirty || f.password.touched) }">
+                    <div class="invalid-feedback">
+                        <p *ngIf="f.password.errors?.required">Password field is required.</p>
+                        <p *ngIf="f.password.errors?.minlength">Password must be 3 characters long, we need another
+                            {{f.password.errors.minlength.requiredLength - f.password.errors.minlength.actualLength}} characters
+                        </p>
+                    </div>
+                </div>
+        
+        
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="_remember_me" name="_remember_me"
+                            formControlName="_remember_me" checked="">
+                        <label class="custom-control-label" for="_remember_me">Remember me</label>
+                    </div>
+                </div>
+        
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSubmit()">Submit</button>
+                <button type="button" class="btn  btn-outline-primary ml-md-3" (click)="form.reset()">Rest</button>
+            </fieldset>
+        </form>
+
+
+
+
+
+    </div>  
+</div>
+
+
+

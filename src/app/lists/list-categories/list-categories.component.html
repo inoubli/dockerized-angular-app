@@ -1,0 +1,44 @@
+<h1>list of categories</h1>
+<div *ngIf="isLoading" class="row spinner">
+  <img src="./assets/images/spinner.svg" alt="Loading...">
+</div>
+
+<table *ngIf="!isLoading" class="table table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Legend</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories | paginate : { id: 'categories_pagination',
+      itemsPerPage: itemsPerPage,
+      totalItems: totalItems,
+      currentPage: page }">
+      <th scope="row">{{category.id}}</th>
+      <td>{{category.name}}</td>
+      <td>{{category.description}}</td>
+      <td><span class="badge badge-pill badge-info">{{category.legend}}</span></td>
+      <td>
+          <button type="button" class="btn btn-info btn-circle"  data-placement="top" title="View" [routerLink]="['/lists/category/view', category.id]">
+            <i class="fa fa-list"></i></button>
+          <button type="button" class="btn btn-warning btn-circle" data-placement="top" title="Edit" [routerLink]="['/lists/category/edit', category.id]">
+            <i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-danger btn-circle" data-placement="top" title="Delete" (click)="delete(category.id)">
+            <i class="fa fa-window-close"></i></button>
+        </td>     
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!isLoading">
+  <pagination-controls 
+    id="categories_pagination" 
+    directionLinks="true"  
+    (pageChange)="pageChanged($event)">
+
+  
+  </pagination-controls>
+</div>
